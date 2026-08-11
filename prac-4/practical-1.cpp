@@ -83,6 +83,29 @@ void delete_(int x){
     trav->link=trav->link->link;
     free(temp);
 }
+void insert_middle(){
+    int v3;
+    cout<<"Enter v3:";
+    cin>>v3;
+    struct node *temp = create(v3);
+    if(head==NULL){
+        head=temp;
+        return;
+    }
+    if(head->link==NULL){
+        head->link=temp;
+        return;
+    }
+    struct node *trav=head->link;
+    struct node *temp1=head;
+    while(trav!=NULL && trav->link!=NULL){
+        temp1=temp1->link;
+        trav=trav->link->link;
+    }
+    temp->link=temp1->link;
+    temp1->link=temp;
+
+}
 int main(){
     int n;
     while(true){
@@ -99,20 +122,23 @@ int main(){
 
             break;
         case 3:
-            display();
+            insert_middle();
             break;
         case 4:
-            delete_front();
+            display();
             break;
         case 5:
-            delete_back();
+            delete_front();
             break;
         case 6:
+            delete_back();
+            break;
+        case 7:
             int x;cout<<"Enter value of x:";
             cin>>x;
             delete_(x);
             break;
-        case 7:
+        case 8:
             exit(0);
         default:
             cout<<"invalid argument:"<<endl;
